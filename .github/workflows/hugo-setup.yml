@@ -26,8 +26,8 @@ jobs:
       
       - name: Verify hugo version
         run: |
-          hugo -version,
-          ls -l
+          ls -l,
+          hugo -version
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
