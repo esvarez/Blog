@@ -1,0 +1,89 @@
+baseURL: "http://example.com/"
+languageCode: en-us
+title: "Erick Suárez"
+theme: PaperMod
+DefaultContentLanguage: es
+
+menu:
+  main:
+    - identifier: buscar
+      name: Buscar
+      url: /buscar/
+      weight: 10
+    - identifier: categories
+      name: Categorias
+      url: /categories/
+      weight: 20
+    - identifier: tags
+      name: Tags
+      url: /tags/
+      weight: 30
+
+params:
+  env: production
+  keywords: [Blog, Portfolio, Backend, Desarrollo]
+  author: "Erick Suárez"
+  ShowShareButtons: true
+  ShowReadingTime: true
+  ShowBreadCrumbs: true
+  comments: true
+
+  homeInfoParams:
+    Title: fmt.Println("Hola mundo 🤙")
+    Content: "¡Hey! Soy Erick Suárez, Ingeniero de software con más de 5 años de experiencia, disfruto, entre otras cosas, aprender cada día algo nuevo y compartirlo. Ojalá encuentres útil alguno de los post que con gusto estaré actualizando, siéntete libre de contactarme por alguna de mis redes"
+
+  socialIcons:
+    - name: github
+      url: "<link>"
+    - name: twitter
+      url: "link"
+    - name: cv
+      url: "..."
+    - name: linkedin
+      url: "..."
+
+  fuseOpts:
+    isCaseSensitive: false
+    shouldSort: true
+    location: 0
+    distance: 1000
+    threshold: 0.4
+    minMatchCharLength: 0
+    keys: [ "title", "permalink", "summary", "content" ]
+
+languages:
+  es:
+    languageName: Español
+    weight: 1
+  en:
+    languaheName: English
+    weight: 2
+    menu:
+      main:
+        - identifier: search
+          name: Search
+          url: /search/
+          weight: 10
+        - identifier: categories
+          name: Categories
+          url: /categories/
+          weight: 20
+        - identifier: tags
+          name: Tags
+          url: /tags/
+          weight: 30
+    params:
+      homeInfoParams:
+        Title: fmt.Println("Hello world 🤙")
+        Content: "¡Hey! I'm Erick Suárez, a Software engineer with more than 5 years of experience, I enjoy learning new things and sharing them. I hope you find useful my posts, feel free to reach me out on any of my social networks to collaborate, ask anything or just say hello"
+
+taxonomies:
+  category: categories
+  tag: tags
+  langs: langs
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
