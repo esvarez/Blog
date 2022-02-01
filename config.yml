@@ -34,13 +34,11 @@ params:
 
   socialIcons:
     - name: github
-      url: "<link>"
+      url: "https://github.com/esvarez"
     - name: twitter
-      url: "link"
-    - name: cv
-      url: "..."
+      url: "https://twitter.com/esuarezdev"
     - name: linkedin
-      url: "..."
+      url: "https://www.linkedin.com/in/erick-su%C3%A1rez-zavala-317485145/"
 
   fuseOpts:
     isCaseSensitive: false
