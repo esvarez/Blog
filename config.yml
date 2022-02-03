@@ -1,7 +1,8 @@
-baseURL: "http://example.com/"
+baseURL: "http://147.182.230.16/"
 languageCode: en-us
 title: "Erick Suárez"
-theme: PaperMod
+theme:
+  - PaperMod
 DefaultContentLanguage: es
 
 menu:
