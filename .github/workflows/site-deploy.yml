@@ -38,7 +38,7 @@ jobs:
         run: hugo --minify     
 
       # Runs a set of commands using the runners shell
-      - name: Deploy with rsync
-        run: scp -r ./public/* ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/html/
+      - name: Deploy with scp
+        run: scp -i ${{ secrets.SSH_PRIVATE_KEY }} -r ./public/* ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/html/
           
 
