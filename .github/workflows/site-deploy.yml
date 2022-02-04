@@ -38,7 +38,9 @@ jobs:
         run: hugo --minify     
         
       - name: save key
-        run: echo $DEV_KEY > ./.key_public
+        run: |
+          echo $DEV_KEY > ./.key_public
+          chmod 400 ./.key_public
         shell: bash
         env:
           DEV_KEY : ${{ secrets.SSH_PUB_KEY }} 
