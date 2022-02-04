@@ -31,7 +31,7 @@ params:
 
   homeInfoParams:
     Title: fmt.Println("Hola mundo 🤙")
-    Content: "¡Hey! Soy Erick Suárez, Ingeniero de software con más de 5 años de experiencia, disfruto, entre otras cosas, aprender cada día algo nuevo y compartirlo. Ojalá encuentres útil alguno de los post que con gusto estaré actualizando, siéntete libre de contactarme por alguna de mis redes [test](test)"
+    Content: "¡Hey! Soy Erick Suárez, Ingeniero de software con más de 5 años de experiencia, disfruto, entre otras cosas, aprender cada día algo nuevo y compartirlo. Ojalá encuentres útil alguno de los post que con gusto estaré actualizando, siéntete libre de contactarme por alguna de mis redes"
 
   socialIcons:
     - name: github
