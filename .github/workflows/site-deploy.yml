@@ -41,7 +41,7 @@ jobs:
         run: echo $DEV_KEY > ./.key_public
         shell: bash
         env:
-          DEV_KEY : ${{ secrets.SSH_PRIVATE_KEY }} 
+          DEV_KEY : ${{ secrets.SSH_PUB_KEY }} 
 
       # Runs a set of commands using the runners shell
       - name: Deploy with scp
