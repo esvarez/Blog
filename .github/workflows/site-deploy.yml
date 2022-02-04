@@ -19,15 +19,8 @@ jobs:
     runs-on: ubuntu-latest
 
     # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      - name: Install SSH Key
-        uses: shimataro/ssh-key-action@v2
-        with:
-          key: ${{ secrets.SSH_PRIVATE_KEY }} 
-          known_hosts: 'just-a-placeholder-so-we-dont-get-errors'
-          
-      - uses: actions/checkout@v2    
-                
+    steps:          
+      - uses: actions/checkout@v2                    
       - uses: peaceiris/actions-hugo@v2.4.13
       
       - name: Adding Known Hosts      
@@ -37,16 +30,15 @@ jobs:
       - name: Build
         run: hugo --minify     
         
-      - name: save key
-        run: |
-          echo $DEV_KEY > ./.key_public
-          chmod 400 ./.key_public
-        shell: bash
-        env:
-          DEV_KEY : ${{ secrets.SSH_PRIVATE_KEY }} 
+      - name: copy file via ssh password
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.PASSWORD }}
+          port: ${{ secrets.PORT }}
+          source: "./public/*"
+          target: "/var/www/html/"
 
-      # Runs a set of commands using the runners shell
-      - name: Deploy with scp
-        run: scp -i ./.key_public -r ./public/* ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/html/
           
 
