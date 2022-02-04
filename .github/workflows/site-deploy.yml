@@ -39,6 +39,6 @@ jobs:
 
       # Runs a set of commands using the runners shell
       - name: Deploy with rsync
-        run: rsync -avz ./public/* ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/html/
+        run: scp -r ./public/* ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/var/www/html/
           
 
