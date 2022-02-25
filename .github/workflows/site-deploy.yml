@@ -27,7 +27,7 @@ jobs:
       - name: Build
         run: hugo --minify             
       - name: list files
-        run: ls -la
+        run: ls -la ./public
 
           
 
