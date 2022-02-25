@@ -18,19 +18,19 @@ La nueva versión de Go (1.18) esta cerca de ser lanzada, una de las novedades, 
 
 ## ¿Qué es Fuzz Testing?
 
-Es una tecnica de testing automatizado con el proposito de encontrar vulnerabilidades dando entradas invalidas a un sistema o software. 
+Es una técnica de testing automatizado con el propósito de encontrar vulnerabilidades dando entradas invalidas a un sistema o software. 
 
-Es practicado más comunmente por hackers e ingenieros de seguridad, los primeros para aprovechar las vulneravilidades y los segundos para arreglarlas antes de que estas puedan ser explotadas.
+Es practicado más comúnmente por hackers e ingenieros de seguridad, los primeros para aprovechar las vulnerabilidades y los segundos para arreglarlas antes de que estas puedan ser explotadas.
 
-El fuzz testing involucra cantidades masivas de informacion que es generada de manera aleatoria con la cual será puesto a prueba el sistema con el objetivo de lograrlo romper. 
+El fuzz testing involucra cantidades masivas de información que es generada de manera aleatoria con la cual será puesto a prueba el sistema con el objetivo de lograrlo romper. 
 
-Este metodo es especialmente util para encontrar bugs y casos extremos que como humanos es muy facil olvidar o no tener en cuenta al momento de que probamos nuestros servicios.
+Este método es especialmente útil para encontrar bugs y casos extremos que como humanos es muy fácil olvidar o no tener en cuenta al momento de que probamos nuestros servicios.
 
 ## Go Fuzzing
 
-Ahora que sabemos de que hablamos, ¿Cómo puedo usarlo en mis proyectos en Go? Como ya mencionamos esta carateristica esta pensada para la version 1.18 de go, que actualmente esta en beta, pero afortunadamente podemos probar ya.
+Ahora que sabemos de que hablamos, ¿Cómo puedo usarlo en mis proyectos en Go? Como ya mencionamos esta característica esta pensada para la version 1.18 de go, que actualmente está en beta, pero afortunadamente podemos probar ya.
 
-### Installar version 1.18 Beta
+### Instalar version 1.18 Beta
 
 Corremos el siguiente comando para instalar la versión beta.
 
@@ -38,12 +38,12 @@ Corremos el siguiente comando para instalar la versión beta.
 $ go install golang.org/dl/go1.18beta1@latest
 ```
 
-Descargamos actualizaciones
+Descargamos actualizaciones.
 ```bash
 $ go1.18beta1 download
 ```
 
-Debemos usar la versión beta, en lugar de la ultima (si es que la tenemos instalada)
+Para este tutorial debemos usar la versión beta.
 ```bash
 $ go1.18beta1 version
 ```
@@ -54,7 +54,7 @@ $ alias go=go1.18beta1
 $ go version
 ```
 
-### Creando el codigo a testear
+### Creando el código a testear
 
 1. Vamos a crear una nueva carpeta
 
@@ -68,7 +68,7 @@ $ cd fuzz
 $ go mod init ejemplo/fuzz
 ```
 
-3. Vamos a crear un nuevo archivo `main.go` con el siguiente metodo, su función es simple, recibir una cadena e invertirla
+3. Vamos a crear un nuevo archivo `main.go` con el siguiente método, su función es simple, recibir una cadena e invertirla
 
 ```go {linenos=table,hl_lines=["16-22"],linenostart=1}
 package main
@@ -95,7 +95,7 @@ func Invertir(s string) string {
 }
 ```
 
-Al correr nuestro programa deberiamos obtener una salida similar
+Al correr nuestro programa beberíamos obtener una salida similar
 ```bash
 $ go run .
 original: "Anita lava la tina"
@@ -104,7 +104,7 @@ Invertir una vez más: "Anita lava la tina"
 ```
 ### Añadiendo test unitarios
 
-1. Crearemos un archivo `main_test.go` con el siguiente codigo.
+1. Crearemos un archivo `main_test.go` con el siguiente código.
 
 ```go {linenos=table,hl_lines=[],linenostart=1}
 package main
@@ -130,7 +130,7 @@ func TestInvertir(t *testing.T) {
 }
 ```
 
-En este test solo vamos a probar que nuestra función invierta correctamente la cadena, por lo que si lo corremos deveria pasar sin mucho problema
+En este test solo vamos a probar que nuestra función invierta correctamente la cadena, por lo que si lo corremos debería pasar sin mucho problema
 
 ```bash
 $ go test
@@ -138,10 +138,10 @@ PASS
 ok      ejemplo/fuzz  0.013s
 ```
 
-### Añadindo fuzz test
+### Añadiendo fuzz test
 
 Puntos importantes a tener en cuenta con respecto a los fuzz test
-  - Deben ser nombrados con la siguiente nomemclatura **FuzzNombre**, empezar por *Fuzz* segudio del nombre que quieras darle
+  - Deben ser nombrados con la siguiente nomenclatura **FuzzNombre**, empezar por *Fuzz* seguido del nombre que quieras darle
   - Los argumentos deben ser:
     - string, []byte
     - int, int8, int16, int32/rune, int64
@@ -180,22 +180,22 @@ func FuzzInvertir(f *testing.F) {
 }
 ```
 
-A diferenencia de los unit test en los que normalmente damos una entrada y sabemos exactamente que salida esperamos, en los fuzz test, dado que recibimos datos generados de manera aleatoria, no podemos predecir la salida esperada. Es por eso que en nuestras pruebas estamos verificando que al aplicar nuevamente nuestro metodo, recibamos la cadena original.
+A diferenciá de los unit test en los que normalmente damos una entrada y sabemos exactamente que salida esperamos, en los fuzz test, dado que recibimos datos generados de manera aleatoria, no podemos predecir la salida esperada. Es por eso que en nuestras pruebas estamos verificando que al aplicar nuevamente nuestro método, recibamos la cadena original.
 
-Tenemos dos opciones para correr nuestros test:
-  - La forma por default: `go test .` Si hacemos esto, nuestro fuzz test hará la prueba con los valores con que alimentamos nuestro corpus, **No va a generar ningun valor**
-  - Usando la vandera `-fuzz`: `go test . -fuzz=NombreDelTest` Si usamos esta alternativa nuestro fuzz test empezara a generar datos de manera aleatoria para probar nuestros codigo.
+Tenemos dos opciones para correr nuestros tests:
+  - La forma por default: `go test .` Si hacemos esto, nuestro fuzz test hará la prueba con los valores con que alimentamos nuestro corpus, **No va a generar algún valor**
+  - Usando la bandera `-fuzz`: `go test . -fuzz=NombreDelTest` Si usamos esta alternativa nuestro fuzz test empezara a generar datos de manera aleatoria para probar nuestro código.
 
-### Probemos el codigo
+### Probemos el código
 
-1. Primero corramos nuestro codigo de manera nativa y verifiquemos que nuestros valores de corpus pasan correctamente
+1. Primero corramos nuestro código de manera nativa y verifiquemos que nuestros valores de corpus pasan correctamente
 ```bash
 go test
 PASS
 ok  	ejemplo/fuzz	0.672s
 ```
 
-2. Ahora corramos nuestro codigo con la bandera fuzz
+2. Ahora corramos nuestro código con la bandera fuzz
 ```bash {hl_lines=[10]}
 go test -fuzz=Fuzz
 fuzz: elapsed: 0s, gathering baseline coverage: 0/3 completed
@@ -214,19 +214,19 @@ exit status 1
 FAIL	ejemplo/fuzz	0.609s
 ```
 
-Como vemos nuestro codigo ah fallado, a partir de este momento tenemos una nueva entrada para nuestro corpus, la entrada con la que nuestro test fallo, el cual podemos ver en el archivo generado.
+Como vemos nuestro código ah fallado, a partir de este momento tenemos una nueva entrada para nuestro corpus, la entrada con la que nuestro test fallo, el cual podemos ver en el archivo generado.
 ```txt
 go test fuzz v1
 string("ώ")
 ```
-Si volvemos a correr el comando `go test .` nuestras pruebas fallaran porque ahora el test incluye la entrada invalida que encontro previamente.
+Si volvemos a correr el comando `go test .` nuestras pruebas fallaran porque ahora el test incluye la entrada invalida que encontró previamente.
 
 ### Arreglando el error
 
 Si gustas, eres libre de buscar el problema por ti.
-En este tutorial, vamos a usar la terminar para buscar el error, por el mensaje recivido sabemos que nuestra salida UTF-8 valido.
+En este tutorial, vamos a usar la terminar para buscar el error, por el mensaje recibido sabemos que nuestra salida UTF-8 valido.
 
-Vamos a añadir la siguente linea de codigo para obtener mas informacion.
+Vamos a añadir la siguiente línea de código para obtener más información.
 
 ```go {linenos=table,hl_lines=[9]}
 func FuzzInvertir(f *testing.F) {
@@ -274,7 +274,7 @@ FAIL	ejemplo/fuzz	0.411s
 FAIL
 ```
 
-Podemos ver que los valores con los que poblamos nuestro corpus, todos son cadenas, en los cuales los carateres necesitan un solo byte, pero con el caracter ώ requiere mas, por lo que al intentar invertirlo byte por byte resulta en un caracter invalido. Asi que vamos a solucionar el error
+Podemos ver que los valores con los que poblamos nuestro corpus, todos son cadenas, en los cuales los caracteres necesitan un solo byte, pero con el carácter ώ requiere más, por lo que al intentar invertirlo byte por byte resulta en un carácter invalido. Así que vamos a solucionar el error
 
 #### Corrigiendo el error
 
@@ -293,7 +293,7 @@ Si volvemos a ejecutar nuestros test:
 go test .
 ok  	ejemplo/fuzz	0.549s
 ```
-Nuestros test pasaron exitosamente. Muy bien! ahora tenemos que correr nuevamente nuestros fuzz test en busca de algun error o caso que no contemplamos.
+Nuestros tests pasaron exitosamente. Muy bien! ahora tenemos que correr nuevamente nuestros fuzz test en busca de algún error o caso que no contemplamos.
 ```bash
 go test -fuzz=Fuzz
 fuzz: elapsed: 0s, gathering baseline coverage: 0/4 completed
@@ -312,11 +312,11 @@ FAIL
 exit status 1
 FAIL	ejemplo/fuzz	0.512s
 ```
-Vemos que ahora el error es causado porque la cadena no es la misma al invertirla por segunda vez, esto es debido a que la entrada no es un caracter UTF-8 valido.
+Vemos que ahora el error es causado porque la cadena no es la misma al invertirla por segunda vez, esto es debido a que la entrada no es un carácter UTF-8 valido.
 
 ## Arreglando doble inversion
 
-Como habiamos mencionado, la entrada es un slice de bytes con un solo byte `\xdf`, por lo que al convertirlo a un `[]rune`, Go hace un encode a UTF-8 remplazando el byte por el siguiente caracter �. Vamos a agregar las siguientes lineas para obtener mas información.
+Como habíamos mencionado, la entrada es un slice de bytes con un solo byte `\xdf`, por lo que al convertirlo a un `[]rune`, Go hace un encode a UTF-8 remplazando el byte por el siguiente carácter �. Vamos a agregar las siguientes líneas para obtener más información.
 
 ```go {hl_lines=[2,4]}
 func Invertir(s string) string {
@@ -330,7 +330,7 @@ func Invertir(s string) string {
 }
 ```
 
-Vamos a correr nuestro fuzz test usando la bandera `-run` para correr unicamente el test que nos interesa inspeccionar.
+Vamos a correr nuestro fuzz test usando la bandera `-run` para correr únicamente el test que nos interesa inspeccionar.
 
 ```bash
 go test -run=FuzzInvertir/6d1afba479d1e743926c35fff31a09168a87c4c416f6d927c76d506f3c63ba08
@@ -346,7 +346,7 @@ FAIL
 exit status 1
 FAIL	ejemplo/fuzz	0.257s
 ```
-Como vemos, podemos confirmar que la entrada no es un carater unicode valido. Vamos a solucionar ese escenario. Si detectamos que la entrada es un caracter invalido regresaremos un error, tendremos que modificar la firma de nuestro metodo y hacer ajustes en nuestro codigo para soportar la actualizacion de nuestro metodo
+Como vemos, podemos confirmar que la entrada no es un carácter unicode valido. Vamos a solucionar ese escenario. Si detectamos que la entrada es un carácter invalido regresaremos un error, tendremos que modificar la firma de nuestro método y hacer ajustes en nuestro código para soportar la actualización de nuestro método
 
 ```go {linenos=table,hl_lines=[4, 6, "11-12", "14-12", "14-15" ,"18-21", 26],linenostart=1}
 package main
@@ -368,7 +368,7 @@ func main() {
 
 func Invertir(s string) (string, error) {
 	if !utf8.ValidString(s) {
-		return s, errors.New("entrada es un caracter UTF-8 invalido")
+		return s, errors.New("entrada es un carácter UTF-8 invalido")
 	}
 	b := []rune(s)
 	for i, j := 0, len(b)-1; i < len(b)/2; i, j = i+1, j-1 {
@@ -378,7 +378,7 @@ func Invertir(s string) (string, error) {
 }
 ```
 
-De igual manera tendremos que modificar nuestros test y si encontramos un error saltar ese escenario.
+De igual manera tendremos que modificar nuestros tests y si encontramos un error saltar ese escenario.
 
 ```go {linenos=table,hl_lines=[17, "31-38"],linenostart=1}
 package main
@@ -430,14 +430,14 @@ func FuzzInvertir(f *testing.F) {
 }
 ```
 
-Podemos correr nuevamente nuestros test.
+Podemos correr nuevamente nuestros tests.
 
 ```bash
 go test .
 ok  	ejemplo/fuzz	0.546s
 ```
 
-Bien, vemos que ya quedo corregido el escenario que no soportamos. Ahora volvamos a correr nuestros fuzz test. Los Fuzz test seguirar ejecutandose hasta encontrar algun error, de no ser asi podemos detenerlos con ctrl-c
+Bien, vemos que ya quedo corregido el escenario que no soportamos. Ahora volvamos a correr nuestros fuzz test. Los Fuzz test seguirá ejecutándose hasta encontrar algún error, de no ser así podemos detenerlos con ctrl-c
 ```bash
 go test -fuzz=Fuzz
 fuzz: elapsed: 0s, gathering baseline coverage: 0/5 completed
@@ -451,7 +451,7 @@ PASS
 ok  	ejemplo/fuzz	51.083s
 ```
 
-Podemos correrlos con la bander `-fuzztime` para limitar el tiempo de ejecución
+Podemos correrlos con la bandera `-fuzztime` para limitar el tiempo de ejecución
 ```bash
 go test -fuzz=Fuzz -fuzztime 30s
 fuzz: elapsed: 0s, gathering baseline coverage: 0/41 completed
@@ -473,6 +473,6 @@ ok  	ejemplo/fuzz	31.508s
 
 ## Conclusion
 
-Genial! Ahora sabemos sobre fuzz testing y como podremos trabajar con el en Go. Este fue una intruduccion simple a sus caracteristicas, pero sin duda es una herramienta muy util para encontrar fallas en nuestro codigo. Si tienes una duda o comentario no dudes en contactarme por alguna de mis redes
+Genial! Ahora sabemos sobre fuzz testing y como podremos trabajar con el en Go. Este fue una introducción simple a sus características, pero sin duda es una herramienta muy útil para encontrar fallas en nuestro código. Si tienes una duda o comentario no dudes en contactarme por alguna de mis redes
 
-Este post esta basado y fue traducido de la documentacion original de go [Tutorial: Getting started with fuzzing](https://go.dev/doc/tutorial/fuzz).
+Este post está basado y fue traducido de la documentación original de go [Tutorial: Getting started with fuzzing](https://go.dev/doc/tutorial/fuzz).
