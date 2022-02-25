@@ -36,7 +36,7 @@ params:
 
   homeInfoParams:
     Title: fmt.Println("Hola mundo 🤙")
-    Content: "¡Hey! Soy Erick Suárez, Ingeniero de software [click para saber más](about), disfruto, entre otras cosas, aprender cada día algo nuevo y compartirlo. Ojalá encuentres útil alguno de los post que con gusto estaré actualizando, siéntete libre de contactarme por alguna de mis redes"
+    Content: "¡Hey! Soy Erick, Ingeniero de software [click para saber más](about), disfruto, entre otras cosas, aprender cada día algo nuevo y compartirlo. Ojalá encuentres útil alguno de los post que con gusto estaré actualizando, siéntete libre de contactarme por alguna de mis redes"
 
   socialIcons:
     - name: github
@@ -84,7 +84,7 @@ languages:
     params:
       homeInfoParams:
         Title: fmt.Println("Hello world 🤙")
-        Content: "¡Hey! I'm Erick Suárez, a Software engineer [click to know more](about), I enjoy learning new things and sharing them. I hope you find useful my posts, feel free to reach me out on any of my social networks to collaborate, ask anything or just say hello"
+        Content: "¡Hey! I'm Erick, a Software engineer [click to know more](about), I enjoy learning new things and sharing them. I hope you find useful my posts, feel free to reach me out on any of my social networks to collaborate, ask anything or just say hello"
 
 taxonomies:
   category: categories
