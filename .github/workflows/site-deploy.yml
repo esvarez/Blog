@@ -34,7 +34,7 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.PASSWORD }}
           port: ${{ secrets.PORT }}
-          source: "./public/*"
+          source: "public/*"
           target: "/var/www/html/"
 
           
