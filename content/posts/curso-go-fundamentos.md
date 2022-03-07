@@ -1,14 +1,16 @@
 ---
 title: "Curso Go 01: Fundamentos"
 date: 2022-03-02T10:34:29-06:00
-draft: true
+draft: false
 categories:
-    - Course
+    - Curso
+    - Golang
 tags:
     - Curso
     - Go
     - Golang    
     - Básico
+    - Variables
 cover:
     image: "/img/curso-go-fundamentos/gophers_aprendiendo.webp"
     alt: "gopher tester"    
@@ -70,7 +72,7 @@ $ go version
 
 Estamos a punto de escribir nuestras primeras líneas en Go. Para escribir nuestro código, creamos nuestra carpeta, recomiendo nombrarla `curso_go`, podemos usar el editor o IDE que más nos guste.
 
-Crearemos nuestro primer modulo, dentro de nuestra carpeta y con el comando:
+Crearemos nuestro primer modulo, dentro de nuestra carpeta el comando:
 ```bash
 $ go mod init ejemplo/hola
 go: creating new go.mod: module ejemplo/hola
@@ -122,43 +124,43 @@ Las variables son una parte importante de cualquier lenguaje de programación. G
 Hay diferentes formas de declarar una o más variables, todas son validas y depende de tus necesidades.
 ```go
 func main() {
-  // Declarar
-  var edad int
-  fmt.Println(edad) // 0
-
-  // asignar valor
-  edad = 10
-  fmt.Println(edad) // 10
-
-  // Declarar explicitamente e inicilizar
-  var nombre string = "Gopher"
-  fmt.Println(nombre) // Gopher
-
-  // Declaracion multiple
-  var ciudad, estado string = "Guadalajara", "Jalisco"
-  fmt.Println(ciudad, estado) // Guadalajara Jalisco
-
-  // inferir tipo de valor
-  var activo = true
-  fmt.Println(activo) // true
-
-  // La sintaxis ':=' es un atajo para declarar e inizilizar 
-  alias := "Go"
-  fmt.Println(alias) // Go
+    // Declarar
+    var edad int
+    fmt.Println(edad) // 0
+    
+    // asignar valor
+    edad = 10
+    fmt.Println(edad) // 10
+    
+    // Declarar explicitamente e inicilizar
+    var nombre string = "Gopher"
+    fmt.Println(nombre) // Gopher
+    
+    // Declaracion multiple
+    var ciudad, estado string = "Guadalajara", "Jalisco"
+    fmt.Println(ciudad, estado) // Guadalajara Jalisco
+    
+    // inferir tipo de valor
+    var activo = true
+    fmt.Println(activo) // true
+    
+    // La sintaxis ':=' es un atajo para declarar e inizilizar 
+    alias := "Go"
+    fmt.Println(alias) // Go
 }
 ```
 Formas invalidas de declarar una variable
 
 ```go
 func main() {
-  var edad int
-  fmt.Println(edad) // 0  
-
-  // Linea NO valida, ya que version no ah sido declarada
-  version = 16
-
-  // Linea NO valida, edad ya fue declarada
-  var edad = 13
+    var edad int
+    fmt.Println(edad) // 0  
+    
+    // Linea NO valida, ya que version no ah sido declarada
+    version = 16
+    
+    // Linea NO valida, edad ya fue declarada
+    var edad = 13
 }
 ```
 
@@ -172,7 +174,7 @@ Existen diferentes formas en como podemos declarar constantes.
 
 ```go
 func main() {
-		// Explicito
+    // Explicito
 	const PI float32 = 3.14
 	fmt.Println(PI) // 3.14
 
@@ -213,23 +215,23 @@ En go, al ser un lenguaje tipado, tenemos que declarar que tipo de datos va a al
 Este tipo de dato representa dos estados, verdadero o falso (*true* o *false*), en caso de declarar una variable de tipo bool y no asignarle un valor, su *zero value* será falso
 
 ```go
-  func main() {
+func main() {
     var estoyAprendiendo bool
     estoyAprendiendo = true
     fmt.Println("Esto aprendiendo?", estoyAprendiendo) // Esto aprendiendo? true
-  }
+}
 ```
 
 ### Cadenas (string)
 
-Los *string*, son cadenas de caracteres que nos ayudan a representar textos, el valor debe ser colocado entre comillas dobles (*"valor"*), puede ser desde una cadena vacía ("") hasta un libro completo.
+Los *string*, son cadenas de caracteres que nos ayudan a representar textos, el valor debe ser colocado entre comillas dobles (*"valor"*), puede ser desde una cadena vacía ("") hasta lo que deseemos, él limite es la memoria.
 
 ```go
-  func main() {
+func main() {
     var nombre string
     nombre = "Gopher"
     fmt.Println("Hola", nombre) // Hola Gopher
-  }
+}
 ```
 
 ### Enteros (int)
@@ -309,8 +311,8 @@ func main() {
 	var abyte byte = 'a'
 	var intbyte byte = 71
 
-	fmt.Printf("'%c' en valor ASCII es %d\n", abyte, abyte)
-	fmt.Printf("el valor ASCII %d representa '%c'\n", intbyte, intbyte)
+	fmt.Printf("'%c' en valor ASCII es %d\n", abyte, abyte) // 'a' en valor ASCII es 97
+	fmt.Printf("el valor ASCII %d representa '%c'\n", intbyte, intbyte) // el valor ASCII 71 representa 'G'
 }
 ```
 
@@ -325,9 +327,9 @@ func main() {
 	var alpha rune = 'α'
 
 	fmt.Printf("El caracter '%c'\nEn valor unicode %U\nEn valor entero%d", alpha, alpha, alpha)
-  // El caracter 'α'
-  // En valor unicode U+03B1
-  // En valor entero945%
+    // El caracter 'α' 
+    // En valor unicode U+03B1
+    // En valor entero945%
 }
 ```
 
