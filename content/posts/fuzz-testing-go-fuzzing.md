@@ -6,7 +6,8 @@ categories:
     - Tutorials
 tags:
     - News
-    - Go    
+    - Go
+    - Golang    
     - Go 1.18
 cover:
     image: "/img/fuzz-testing-go-fuzzing/gopher_tester.svg"
