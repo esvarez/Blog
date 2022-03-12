@@ -46,3 +46,4 @@ classes/*
 
 ### VS Code ###
 .vscode/
+.obsidian

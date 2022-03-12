@@ -21,6 +21,8 @@ Go, también conocido como **golang**, es un lenguaje de programación creado po
 
 ## Instalar Go
 
+Si aun no tienes instalado go, puedes hacerlo siguiente este post [pagina oficial](./instalar-go.md)
+
 Para instalar Go, es necesario ir a la [pagina oficial](https://go.dev/doc/install), descargar el paquete de acuerdo a tu sistema operativo y seguir las siguientes instrucciones.
 
 ### Windows
