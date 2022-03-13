@@ -28,6 +28,46 @@ $ go version
 
 Este comando nos debe devolver la version que tenemos instalada de go si todo se instalo correctamente.
 
+#### Configurar espacio de trabajo (workspace)
+
+Cuando hablamos de esacio de trabajo en `go` nos referimos a los directorios donde tendremos nuestro codigo y ejecutables, que serian nuestro directorios `go/src` y `go/bin`
+  - `src`: Es el directorio donde tendremos nuestro codigo de origen escrito en go.
+  - `bin`: Este directorio contiene los ejecutables de nuestro codigo escrito en go o librerias que descarguemos.  
+Los cuales crearemos dentro de nuestro directorio *HOME*
+
+```bash
+$ cd ~
+```
+
+Creamos las carpetas
+
+```bash
+mkdir go/bin, go/src
+```
+
+Si usamos el instalador nuestro `GOPATH` ya debe de estar instaldado, para comprobarlo escribirmos
+
+```bash
+$ go env
+```
+
+Nos tiene que dat un resultado similar:
+
+```bash {linenos=table,hl_lines=[2]}
+set GOOS=windows
+set GOPATH=F:\Users\usuario\go
+set GOPRIVATE=
+set GOPROXY=https://proxy.golang.org,direct
+set GOROOT=F:\Program Files\Go
+set GOSUMDB=sum.golang.org
+```
+
+Agregamos a nuestro path los programas que compilemos de GO
+
+```bash
+setx PATH "$($env:path);$GOPATH\bin"
+```
+
 ### MacOS
 Al abrir el paquete descargado es necesario seguir las instrucciones de instalacion, por defecto el paquete se instala en `/usr/local/go`. Para ver los cambios efectuados es necesario reiniciar o abrir la terminal de comandos y escribir el siguiente comando para verificar la instalcion.
 
@@ -51,7 +91,7 @@ Dentro vamos a crear el siguiente directorio `go/src` y `go/bin`
 $ mkdir -p ~/go/{bin,src}
 ```
 
-#### Configurar GOPATH
+#### Configurar espacio de trabajo (workspace)
 
 El GOPATH, en el paso anterior creamos nuestro GOPATH ahora es necesario hacerle saber a go en donde esta, con nuestras variables de entorno.
 
@@ -79,6 +119,66 @@ $ . ~/.profile
 ```
 
 ### Linux
+
+
+Extraemos el archivo descargado en `/usr/local` con el siguiente comando:
+
+```bash
+rm -rf /usr/local/go && tar -C /usr/local -xzf go1.17.8.linux-amd64.tar.gz
+```
+
+Agregamos la ruta ` /usr/local/go/bin` a nuestras variables de ambiente
+
+```bash
+export PATH=$PATH:/usr/local/go/bin
+```
+
+Este cambio se vera reflejado hasta que reiniciemos nuestra terminal, una vez que lo hagamos verificamos nuestra instalación de Go, el siguiente comando nos debe imprimir nuestra version actual:
+
+```bash
+$ go version
+```
+
+#### Configurar espacio de trabajo (workspace)
+
+Ahora vamos a crear nuestro espacio de trabajo, desde la terminal vamos a nuestro *HOME*.
+
+```bash
+$ cd ~
+```
+
+Dentro vamos a crear el siguiente directorio `go/src` y `go/bin`
+  - `src`: Es el directorio donde tendremos nuestro codigo de origen escrito en go.
+  - `bin`: Este directorio contiene los ejecutables de nuestro codigo escrito en go o librerias que descarguemos.
+
+```shell
+$ mkdir -p ~/go/{bin,src}
+```
+
+El GOPATH, en el paso anterior creamos nuestro GOPATH ahora es necesario hacerle saber a go en donde esta, con nuestras variables de entorno.
+
+```bash
+$ export GOPATH=$HOME/go
+```
+
+Al momento de instalar dependencias, los ejecutables se guardaran, como ya mencionamos, en `~/go/bin` por lo que tenemos que agregar esta ruta nuestro *path* para poder ejecutarlos.
+
+```bash
+$ export PATH=$PATH:$GOPATH/bin
+```
+
+Estas dos lineas las debemos agregar a nuestro `~/.profile` o en el archivo donde tengamos la condiguracion de nuestro *bash*
+
+```
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+```
+
+Para actualizar los cambios escribimos.
+
+```bash
+$ . ~/.profile
+```
 
 ## Estructura
 

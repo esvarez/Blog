@@ -21,54 +21,7 @@ Go, también conocido como **golang**, es un lenguaje de programación creado po
 
 ## Instalar Go
 
-Si aun no tienes instalado go, puedes hacerlo siguiente este post [pagina oficial](./instalar-go.md)
-
-Para instalar Go, es necesario ir a la [pagina oficial](https://go.dev/doc/install), descargar el paquete de acuerdo a tu sistema operativo y seguir las siguientes instrucciones.
-
-### Windows
-
-1. Abrimos el archivo descargado y seguimos las instrucciones.
-
-2. Verificamos que la instalación sea correcta
-    1. Abrimos la línea de comandos
-        1. En Inicio buscamos `cmd` y damos enter.
-    2. Escribimos el siguiente comando en nuestra línea de comandos:
-```bash
-$ go version
-```
-
-### Linux
-
-1. Extraer el archivo en `/usr/local` con el siguiente comando:
-
-```bash
-rm -rf /usr/local/go && tar -C /usr/local -xzf go1.17.8.linux-amd64.tar.gz
-```
-
-2. Agregar `/usr/local/go/bin` a nuestras variables de ambiente
-```bash
-export PATH=$PATH:/usr/local/go/bin
-```
-  Estos cambios se verán reflejados hasta la próxima vez que inicies tu consola, para aplicar los cambios usa el comando
-
-```bash
-source $HOME/.profile.
-```
-
-3. Verificar nuestra instalación de Go, el siguiente comando nos debe imprimir nuestra version actual:
-```bash
-$ go version
-```
-
-### MacOS
-
-1. Abrir el paquete y seguir las instrucciones de instalación
-  Necesitamos reiniciar las terminales que tenemos abiertas para aplicar el cambio
-
-2. Verificamos que nuestra version de go se haya instalado correctamente:
-```bash
-$ go version
-```
+Si aun no tienes instalado go, puedes hacerlo siguiendo este post [pagina oficial](./instalar-go.md)
 
 ## Hola mundo
 
