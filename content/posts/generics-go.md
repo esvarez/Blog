@@ -7,23 +7,23 @@ categories:
     - Golang
 tags:
     - Tutorial
-	- Novedades
+    - Novedades
     - Go
     - Golang    
     - Go 1.18
 cover:
     image: "/img/generics-go/go-gopher.png"
-    alt: "go logo"    
+    alt: "go the logo"    
     relative: false 
 ---
 
-El día 15 de marzo fue anunciada oficialmente la nueva version de go 1.18 y con ella las nuevas caracteriticas entre las que destacan, [Fuzzing](../fuzz-testing-go-fuzzing), el uso de workspaces y generics, de esto ultimo hablaremos en este post.
+El día 15 de marzo fue anunciada oficialmente la nueva version de go 1.18 y con ella las nuevas características entre las que destacan, [Fuzzing](../fuzz-testing-go-fuzzing), el uso de workspaces y generics, de esto último hablaremos en este post.
 
 ## Generics
 
-Lo primero, es saber que son generics o a que nos referimos cuando hablamos de ellos, como quizas ya sepas, en los lenguajes fuertemente tipados es necesario declarar el tipo de variables que vamos a usar y que nuestros metodos, funciones van a recibir o devolver. Esto nos ayuda a ser mas eficientes con el uso de memoria y con la ejecucion de nuestros sistemas, porque sabemos cuanto es el espacio maximo que podriamos llegar a usar. 
+Lo primero, es saber que son los *generics* o a que nos referimos cuando hablamos de ellos, como quizás ya sepas, en un lenguaje fuertemente tipado es necesario declarar el tipo de variables que vamos a usar y que nuestros métodos o funciones van a recibir o devolver. Esto nos ayuda a ser más eficientes con el uso de memoria y con la ejecución de nuestros sistemas, porque sabemos cuanto es el espacio máximo que podríamos llegar a usar. 
 
-Pero esta misma caracteristica nos complica un poco la vida cuando tenemos mas de un metodo que hace exactamente lo mismo, solo cambiando el tipo de variables que va a devolver. Imaginemos una calculadora en el cual tuvieramos lo siguiente:
+Pero esta misma característica nos complica un poco la vida cuando tenemos más de un método que va a hacer exactamente lo mismo, solo cambiando el tipo de variables que va a devolver. Imaginemos un ejemplo simple, una calculadora en el cual tuviéramos lo siguiente:
 
 ```go
 func sumarEnteros (num, num2 int) int {
@@ -35,7 +35,7 @@ func sumarFlotantes(num, num2 float) float {
 }
 ```
 
-Como podemos observar tenemos exactamente el mismo código en ambos metodo, la unica diferencia es el tipo de variable que reciben y que regresan. Este es un ejemplo simple y parece poco codigo, pero imagina que implementas una [pila](#Pila) en el cual debemos soportar varios tipos de datos, nuestro código se veria asi.
+Como podemos observar tenemos exactamente el mismo código en ambas funciones, la única diferencia es el tipo de variable que reciben y que regresan. Este es un ejemplo simple y parece poco código, pero imagina que implementas una [pila](#pila) en el cual debemos soportar varios tipos de datos, nuestro código se vería así.
 
 ```go
 func insertarEntero (item int) {
@@ -63,13 +63,13 @@ func retirarCaracter () char {
 }
 ```
 
-Todas las funciones tienen la misma logica, solo cambia el valor que recibimos y retornamos y puede crecer aun mas, quiza necesitamos soportar booleando, flotantes, etc. Y si necesitamos actualizar la logica al momento de insertar es algo que debemos hacer en todos nuestros metodos, si lo vemos asi suena a mucho trabajo, código duplicado y más posibilidades de crear un bug, afortunadamente existen los genericos y llegaron a **go**.
+Todas las funciones tienen la misma lógica, solo cambia el valor que recibimos y retornamos y puede crecer aún más, quizá necesitamos soportar booleanos, flotantes, etc. Y si necesitamos actualizar la lógica al momento de insertar es algo que debemos hacer en todas nuestras funciones, si lo vemos así suena a mucho trabajo, código duplicado y más posibilidades de crear un bug, afortunadamente existen los *generics* y llegaron a **go**.
 
-Los genericos declaran el tipo de variable en tiempo de ejecución y no de compilación como lo hace cualquier otra variable en los lenguajes compilados. De esta manera podemos marcar nuestro metodo como generico y definir nuestro tipo de variable una vez que ya fue compilado nuestro código.
+Los *generics* declaran el tipo de variable en tiempo de ejecución y no de compilación como lo hace cualquier otra variable en los lenguajes compilados. De esta manera podemos marcar nuestra función como genérica y definir nuestro tipo de variable una vez que ya fue compilado nuestro código.
 
 ## Practica
-Es importante mencionar que para poder seguir este post es necesario tener instalada la version 1.18 de go. Si aun no haz instalado go, puedes seguir el siguiente [post](../instalar-go).
-### Calculadora basica
+Es importante mencionar que para poder seguir este post es necesario tener instalada la version 1.18 de go. Si aún no has instalado go, puedes seguir el siguiente [post](../instalar-go).
+### Calculadora básica
 Volvamos al ejemplo de la calculadora. Abrimos nuestra terminal y en nuestro *HOME* .
 ```bash
 $ cd ~
@@ -102,11 +102,13 @@ func sumaFlotantes(num, num2 float32) float32 {
 }
 ```
 
-### Implementando generics
+### Implementando *generics*
 
-Hasta aquí declaramos dos funciones para sumar enteros y flotantes, ahora vamos a usar generics, para con una sola funcion aceptar enteros y flotantes.
+Hasta aquí declaramos dos funciones para sumar enteros y flotantes, como ya mencionamos, estamos duplicando código, pero las mismas características del lenguaje nos obligaba a hacerlo, hasta ahora, usando generics podemos tener una sola función que se va a encargar de sumar números, la cual no necesita saber si serán, *int* o *float*, si no hasta que se implemente. 
 
-```go {linenos=table,hl_lines=[5, "8-10"],linenostart=1}
+Agregamos una nueva función a nuestro código, para comparar con lo que ya teníamos previamente.
+
+```go {linenos=table,hl_lines=[7, "12-14"],linenostart=1}
 ...
 
 func main() {
@@ -123,9 +125,9 @@ func SumaNumeros[V int32 | float32](num, num2 V) V {
 }
 ```
 
-- En este metodo recibimos dos argumentos que recibe y regresan el tipo de valor `V`.
-- Entre braquets especificamos el `V` tipo el cual especificamos que acepte dos valores `int32` y `float32` los cuales seran aceptados por el compilador.
-- Cuando invocamos la funcion ` SumaNumeros[int32](2, 2)` entre los braquets especificamos el valor generico, que en este caso son lo valores que va a aceptar y regresar.
+- En esta función recibimos dos argumentos que recibe y regresan el tipo de valor `V`.
+- Entre corchetes especificamos el tipo `V` el cual declaramos que acepte dos valores `int32` y `float32`.
+- Cuando invocamos la función ` SumaNumeros[int32](2, 2)` entre los corchetes especificamos el tipo de valor que va a tomar `V`.
 
 ```bash
 $ go run calculadora.go
@@ -134,7 +136,7 @@ Usando funcion generica, 4 y 4.7
 ```
 
 ### Inferir argumento
-```go {linenos=table,hl_lines=[4],linenostart=1}
+```go {linenos=table,hl_lines=[7],linenostart=1}
 
 func main() {
 	var num, num2 int32 = 2, 2
@@ -146,7 +148,7 @@ func main() {
 
 ```
 
-Si removemos de los braquets el tipo de valor, le dejamos al compilador que infiera el tipo de valor al momento de mandarle las variables.
+Si removemos de los corchetes, le dejamos al compilador la tarea de inferir el tipo del dato, en este caso como nuestras variables son `int32` y `float32` sabe que tipo tomar en cada caso.
 
 ```bash
 $ go run calculadora.go
@@ -156,9 +158,9 @@ Usando funcion generica, con inferencia de tipos, 4 y 4.7
 ```
 
 ### Definiendo restricciones de tipo
-Podemos declarar tipo de restricciones como interfaz, de esta manera en la interfaz limitamos el tipo de valores que aceptara nuestra funcion con genericos
+Podemos declarar tipo de restricciones con una interfaz, de esta manera en ella limitamos el tipo de valores que aceptara nuestra función con *generics*, esto nos dara un código más legible y limpio.
 
-```go {linenos=table,hl_lines=["1-3", 10, "15-18"],linenostart=1}
+```go {linenos=table,hl_lines=["1-3", 10, "14-16"],linenostart=5}
 type Numero interface {
 	int32 | float32
 } 
@@ -178,7 +180,7 @@ func SumaNumeros[V Numero](num, num2 V) V {
 
 ```
 
-Al correr el codigo obtenemos
+Al correr el código obtenemos
 
 ```bash
 $ go run calculadora.go
@@ -188,11 +190,11 @@ Usando funcion generica, con inferencia de tipos, 4 y 4.7
 Usando funcion generica, con restricciones, 4 y 4.7
 ```
 
-## Conclución
-Ahora vimos una introduccción de como implementar los genericos en go, son muy utilizados sobre todo en estructura de datos.
+## Conclusión
+Ahora vimos una introducción de como implementar los *generics* en go, son muy útiles sobre todo al momento de implementar estructura de datos.
 
 ## Glosario
 
 #### Pila 
 
-Una pila es una estructura de datos responde a las siguientes relgas, los primeros elementos en entrar son los ultimos en salir de la pila, general mente tiene los metodos, `longitud`, `insertar` y `extraer`
+Una pila es una estructura de datos responde a las siguientes reglas, los primeros elementos en entrar son los últimos en salir de la pila, general mente tiene las funciones, `size()` (tamaño de la pila) , `push(item)` (insertar un valor en la pila) y `pop()` (devuelve y eliminar el valor de la pila que esta arriba).
