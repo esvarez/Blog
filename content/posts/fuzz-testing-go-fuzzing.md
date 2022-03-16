@@ -5,7 +5,7 @@ draft: false
 categories:
     - Tutorials
 tags:
-    - News
+    - Novedades
     - Go
     - Golang    
     - Go 1.18
