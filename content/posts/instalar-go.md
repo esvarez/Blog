@@ -134,7 +134,7 @@ $ . ~/.profile
 Extraemos el archivo descargado en `/usr/local` con el siguiente comando:
 
 ```bash
-rm -rf /usr/local/go && tar -C /usr/local -xzf go1.17.8.linux-amd64.tar.gz
+rm -rf /usr/local/go && tar -C /usr/local -xzf go1.18.linux-amd64.tar.gz
 ```
 
 Agregamos la ruta ` /usr/local/go/bin` a nuestras variables de ambiente
