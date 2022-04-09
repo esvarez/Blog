@@ -2,8 +2,8 @@
 title: "Creando Un Blog Estático"
 date: 2022-02-02T18:17:42-06:00
 draft: false
-categories:
-    - Tech
+categorías:
+    - Tecnología
 tags:
     - Tech
     - Go

@@ -9,7 +9,7 @@ googleAnalytics: G-60J6DNB6HM
 menu:
   main:
     - identifier: about
-      name: Sobre mi
+      name: Sobre mí
       url: /about/
       weight: 1
     - identifier: buscar
@@ -17,8 +17,8 @@ menu:
       url: /search/
       weight: 10
     - identifier: categories
-      name: Categorias
-      url: /categories/
+      name: Categorías
+      url: /categorías/
       weight: 20
     - identifier: tags
       name: Tags
@@ -60,7 +60,7 @@ languages:
     languageName: "Español"
     weight: 1
   en:
-    languageName: ":en:"
+    languageName: "🇺🇸 English"
     languageAltTitle: English
     weight: 2
     menu:
@@ -88,6 +88,7 @@ languages:
 
 taxonomies:
   category: categories
+  categoria: categorías
   tag: tags
   langs: langs
 

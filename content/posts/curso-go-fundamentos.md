@@ -2,7 +2,7 @@
 title: "Curso Go 01: Fundamentos"
 date: 2022-03-02T10:34:29-06:00
 draft: false
-categories:
+categorías:
     - Curso
     - Golang
 tags:
