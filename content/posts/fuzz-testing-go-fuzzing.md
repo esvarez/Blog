@@ -2,7 +2,7 @@
 title: "Fuzz Testing - Go Fuzzing"
 date: 2022-02-24T20:36:16-06:00
 draft: false
-categories:
+categorías:
     - Tutorial
     - Golang
 tags:

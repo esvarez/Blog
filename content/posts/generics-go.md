@@ -2,7 +2,7 @@
 title: "Generics Go"
 date: 2022-03-15T20:32:27-06:00
 draft: false
-categories:
+categorías:
     - Tutorial
     - Golang
 tags:

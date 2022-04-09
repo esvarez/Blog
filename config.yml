@@ -18,7 +18,7 @@ menu:
       weight: 10
     - identifier: categories
       name: Categorías
-      url: /categories/
+      url: /categorías/
       weight: 20
     - identifier: tags
       name: Tags
@@ -60,7 +60,7 @@ languages:
     languageName: "Español"
     weight: 1
   en:
-    languageName: ":en:"
+    languageName: "🇺🇸 English"
     languageAltTitle: English
     weight: 2
     menu:
@@ -88,6 +88,7 @@ languages:
 
 taxonomies:
   category: categories
+  categoria: categorías
   tag: tags
   langs: langs
 

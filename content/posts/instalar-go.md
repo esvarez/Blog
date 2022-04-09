@@ -2,7 +2,7 @@
 title: "Instalar Go"
 date: 2022-03-11T19:13:37-06:00
 draft: false
-categories:
+categorías:
     - Tutorial
     - Golang
 tags:
