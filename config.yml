@@ -9,7 +9,7 @@ googleAnalytics: G-60J6DNB6HM
 menu:
   main:
     - identifier: about
-      name: Sobre mi
+      name: Sobre mí
       url: /about/
       weight: 1
     - identifier: buscar
@@ -17,7 +17,7 @@ menu:
       url: /search/
       weight: 10
     - identifier: categories
-      name: Categorias
+      name: Categorías
       url: /categories/
       weight: 20
     - identifier: tags
