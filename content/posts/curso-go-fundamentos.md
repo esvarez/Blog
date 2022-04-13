@@ -321,6 +321,7 @@ Antes de terminar el post ¿Intentaste a un *int8* con valor 127 sumarle 1? Si n
 En este primer post aprendimos cosas básicas de Go, instalarlo, como declarar variables, constantes, los tipos de variables que existen e imprimir mensajes en consola, Acabas de dar un paso muy importante, atreverte a aprender un nuevo lenguaje o quizás, aprender a programar. Felicitaciones para ti! 
 
 Si tienes dudas, siéntete libre de escribirme, estaré feliz de ayudate a resolverlas.
+Si quieres saber mas, te recomiento leer [control de flujo](../control-de-flujo).
 
 ## Glosario
 
