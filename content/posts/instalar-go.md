@@ -1,6 +1,6 @@
 ---
-title: "Instalar Go"
-date: 2022-03-11T19:13:37-06:00
+title: "Curso Go: Instalando y configurando el entorno"
+date: 2022-03-10T19:13:37-06:00
 draft: false
 categorías:
     - Tutorial
@@ -16,206 +16,58 @@ cover:
     relative: false 
 ---
 
-Quise hacer este post para ser más especifico en como instalar **Go** en cada uno de los sistemas operativos y no tengas problemas en seguir cada uno de los post relacionados con el lenguaje.
+Para poder trabajar en **Go** es necesario configurar nuestro ambiente de desarrollo, en este post vamos a cubrir esos pasos, asi como diferentes formas para ejecutar nuestro código.
 
 ## Instalar Go
-Hay un paso general para los 3 sistemas operativos, es necesario ir a la [pagina oficial](https://go.dev/doc/install), descargar el paquete de acuerdo a tu sistema operativo.
+Para instalar Go, en el caso de Mac y Windows es muy sencillo, basta con ir a la [página oficial](https://go.dev/doc/install), descargar el paquete de acuerdo a tu sistema operativo, *.pkg* para mack y *.msi* para Windows.
 
-### Windows
+En ambos casos, nos hará la configuración por defecto de nuestras variables de entorno.
 
-Como es normal, en windows, descargaremos un ejecutable que tenemos que abrir, podemos elegir la ruta a instalar o si queremos modificarla.
+> También podemos instalar Go usando un gestor de paquetes *Homebrew*, para Mac `brew install go` y *Chocolatey* para Windows `choco install golang`.
 
-Una vez que este completa la instalación debemos cerrar nuestras líneas de comando para que tomen los cambios realizados. Abrimos la línea de comando de nuestra preferencia, `cmd` o `PowerShell`. Para abrir cualquiera de estas terminales tienes dos opciones:
+En el caso de Linux, tiene los archivos comprimidos. La siguiente lista de comando eliminará versiones anteriores de Go, instalará la versión que descargaste y configurará el path. 
 
-  - En el menu de inicio ir a la barra de búsqueda y escribir el nombre de la terminal que quieres abrir.
-  - Usar el atajo `Windos + R`, en la ventana que se abre escribir `cmd` o `PowerShell` y presionar enter
-	
-Dentro de nuestra terminal escribiremos:
+```bash
+$ rm -rf /usr/local/go 
+$ tar -C /usr/local -xzf go1.18.linux-amd64.tar.gz
+$ echo 'export PATH=$PATH:/usr/local/go/bin' >> $HOME/.profile
+$ source $HOME/.profile
+```
+
+Para verificar que está configurado correctamente, ejecutar el siguiente comando:
 
 ```bash
 $ go version
 ```
 
-Este comando nos debe devolver la version que tenemos instalada de go si todo se instalo correctamente.
+Si este comando devuelve la version y arquitectura del sistema, es que está configurado correctamente.
 
-#### Configurar espacio de trabajo (workspace)
+## Entorno de trabajo
 
-Cuando hablamos de espacio de trabajo en `go` nos referimos a los directorios donde tendremos nuestro código y ejecutables, que serian nuestros directorios `go/src` y `go/bin`
-  - `src`: Es el directorio donde tendremos nuestro código de origen escrito en go.
-  - `bin`: Este directorio contiene los ejecutables de nuestro código escrito en go o las librerías que descarguemos.  
-Los cuales crearemos dentro de nuestro directorio *HOME*
+Cuando hablamos de espacio de trabajo en go nos referimos a los directorios donde tendremos nuestro código y ejecutables, ya sean propios o de terceros, que serian nuestros directorios `$HOME/go/src` y `$HOME/go/bin`.
 
-```bash
-$ cd ~
-```
+- src: Es el directorio donde tendremos el código de origen escrito en go.
+- bin: Este directorio contiene los binarios escritos en go o las librerías que descarguemos.
 
-Creamos las carpetas
-
-```bash
-mkdir go/bin, go/src
-```
-
-Si usamos el instalador nuestro `GOPATH` ya debe de estar instalado, para comprobarlo escribiremos.
-
-```bash
-$ go env
-```
-
-Nos tiene que dar un resultado similar:
-
-```bash {linenos=table,hl_lines=[2]}
-set GOOS=windows
-set GOPATH=C:\Users\usuario\go
-set GOPRIVATE=
-set GOPROXY=https://proxy.golang.org,direct
-set GOROOT=C:\Program Files\Go
-set GOSUMDB=sum.golang.org
-```
-
-Agregamos a nuestro path los programas que compilemos de GO
-
-```bash
-setx PATH "$($env:path);$GOPATH\bin"
-```
-
-### MacOS
-Al abrir el paquete descargado es necesario seguir las instrucciones de instalación, por defecto el paquete se instala en `/usr/local/go`. Para ver los cambios efectuados es necesario reiniciar o abrir la terminal de comandos y escribir el siguiente comando para verificar la instalación.
-
-```bash
-$ go version
-```
-
-Este comando nos debe devolver la version que tenemos instalada de go si todo se instalo correctamente.
-
-Ahora vamos a crear nuestro espacio de trabajo, desde la terminal vamos a nuestro *HOME*.
-
-```bash
-$ cd ~
-```
-
-Dentro vamos a crear el siguiente directorio `go/src` y `go/bin`
-  - `src`: Es el directorio donde tendremos nuestro código de origen escrito en go.
-  - `bin`: Este directorio contiene los ejecutables de nuestro código escrito en go o librerías que descarguemos.
-
-```shell
-$ mkdir -p ~/go/{bin,src}
-```
-
-#### Configurar espacio de trabajo (workspace)
-
-El GOPATH, en el paso anterior creamos nuestro GOPATH ahora es necesario hacerle saber a go en donde esta, con nuestras variables de entorno.
+Para sistemas Unix (Mac y linux) usamos el siguiente comando para configurar nuestro entorno de trabajo:
 
 ```bash
 $ export GOPATH=$HOME/go
-```
-
-Al momento de instalar dependencias, los ejecutables se guardaran, como ya mencionamos, en `~/go/bin` por lo que tenemos que agregar esta ruta nuestro *path* para poder ejecutarlos.
-
-```bash
 $ export PATH=$PATH:$GOPATH/bin
 ```
 
-Estas dos líneas las debemos agregar a nuestro `~/.profile` o en el archivo donde tengamos la configuración de nuestro *bash*
-
-```
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
-```
-
-Para actualizar los cambios escribimos.
+En windows, usamos el siguiente comando:
 
 ```bash
-$ . ~/.profile
+$ setx GOPATH %USERPROFILE%\go
+$ setx path "%path%;%USERPROFILE%\bin"
 ```
 
-### Linux
+## Comando Go
 
+Al momento de instalar Go, este nos provee de varias herramientas para poder trabajar con el lenguaje. Para poder correr nuestro código, tenemos dos opciones `go run` o `go build`. Vamos a crear nuestro primer programa en Go y veamos como funcionan estos dos comandos.
 
-Extraemos el archivo descargado en `/usr/local` con el siguiente comando:
-
-```bash
-rm -rf /usr/local/go && tar -C /usr/local -xzf go1.18.linux-amd64.tar.gz
-```
-
-Agregamos la ruta ` /usr/local/go/bin` a nuestras variables de ambiente
-
-```bash
-export PATH=$PATH:/usr/local/go/bin
-```
-
-Este cambio se vera reflejado hasta que reiniciemos nuestra terminal, una vez que lo hagamos verificamos nuestra instalación de Go, el siguiente comando nos debe imprimir nuestra version actual:
-
-```bash
-$ go version
-```
-
-#### Configurar espacio de trabajo (workspace)
-
-Ahora vamos a crear nuestro espacio de trabajo, desde la terminal vamos a nuestro *HOME*.
-
-```bash
-$ cd ~
-```
-
-Dentro vamos a crear el siguiente directorio `go/src` y `go/bin`
-  - `src`: Es el directorio donde tendremos nuestro código de origen escrito en go.
-  - `bin`: Este directorio contiene los ejecutables de nuestro código escrito en go o librerías que descarguemos.
-
-```shell
-$ mkdir -p ~/go/{bin,src}
-```
-
-El GOPATH, en el paso anterior creamos nuestro GOPATH ahora es necesario hacerle saber a go en donde esta, con nuestras variables de entorno.
-
-```bash
-$ export GOPATH=$HOME/go
-```
-
-Al momento de instalar dependencias, los ejecutables se guardaran, como ya mencionamos, en `~/go/bin` por lo que tenemos que agregar esta ruta nuestro *path* para poder ejecutarlos.
-
-```bash
-$ export PATH=$PATH:$GOPATH/bin
-```
-
-Estas dos líneas las debemos agregar a nuestro `~/.profile` o en el archivo donde tengamos la configuración de nuestro *bash*
-
-```
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
-```
-
-Para actualizar los cambios escribimos.
-
-```bash
-$ . ~/.profile
-```
-
-## Estructura
-
-Ahora que tenemos instalado go en nuestro sistema operativo, la forma en como debemos trabajar, es colocar nuestro código en la carpeta correspondiente.
-
-```
-$GOPATH/src/github.com/usuario/proyecto
-```
-
-En mi caso seria, por ejemplo:
-
-```
-$GOPATH/src/github.com/esvarez/blog
-```
-
-Si vamos a usar paquetes de terceros, por ejemplo el framework `gin`, de la organización `gin-gonic` al descargarlo se guardará en:
-```
-$GOPATH/src/github.com/gin-gonic/gin
-```
-
-Si aún no tienes una cuenta en `github.com` recomiendo crearte una. 
-
-## Primer programa
-
-Ahora si estamos listos para escribir nuestro primer programa, vamos a nuestro directorio principal y creamos un archivo llamado `hola.go`
-
-Dentro escribiremos el siguiente código.
+Creamos una nueva carpeta y dentro de ella creamos un archivo llamado `hola.go`, vamos a escribir (o copiar 😛) el siguiente código:
 
 ```go
 package main
@@ -227,22 +79,42 @@ func main() {
 }
 ```
 
-Al correrlo con el comando
+### go run
+
+Vamos a abrir nuestra consola dentro de la carpeta donde creamos nuestro programa, una vez guardado. 
 
 ```bash
-$ go run hola.go
+go run hola.go
 ```
 
-Debemos obtener la salida
+Vamos a ver en consola: `Hola mundo!`, a pesar de que go es un lenguaje compilado si observamos dentro de nuestra carpeta no hay ningún archivo binario. La forma en como `go run` funciona, crea el archivo binario en memoria y lo ejecuta. Este comando es muy util al momento de desarrollar o estar probando nuestras aplicaciones.
+
+### go build
+
+Una vez que nuestro programa está listo, lo más común es que querríamos crear nuestro archivo binario, en este caso usaremos el comando `go build hola.go`, el cual creara un archivo ejecutable `hola` (`hola.exe` en el caso de windows). Cada vez que corramos el comando `go build` nos creara un archivo binario con el nombre igual a nuestro archivo `.go`, si queremos controlar la salida debemos ejecutar el comando con la bandera `-o`, si queremos que nuestro ejecutable se llame "saludo", el comando a usar debería ser `go build -o saludo hola.go`.
 
 ```bash
-Hola mundo!
+`go build -o saludo hola.go`
 ```
 
-¿Cómo te sientes después de escribir tus primeras líneas de código?
+¿Cómo te sientes después de escribir tus primeras líneas de código en go?
+
+## Formateando nuestro código
+
+Cuando trabajamos en equipo es muy común que nuestro código tenga diferentes formatos, debido al estilo de programar de cada uno de los integrantes. **Go** nos provee de herramienta que nos facilitan formatear y ayudarnos a seguir las mejores prácticas en nuestro código.
+
+El comando `go fmt` nos permite formatear nuestro código para hacer más fácil su lectura, si queremos formatear todos nuestros archivos debemos usar `go fmt ./...`.
+
+Otro comando bastante útil que nos ayuda a tener mejores prácticas es `go vet`, este comando nos ayuda a verificar si nuestro código tiene errores, si lo tiene nos muestra el error y nos permite corregirlos corriendo el siguiente comando `go vet ./...`.
+
+## Editor de código
+
+Para trabajar con go tenemos 2 herramientas bastante populares.
+
+El editor de código [**VSCode**](https://code.visualstudio.com/) (Visual studio code) Es una herramienta gratuita que nos permite trabajar con el lenguaje si descargamos algunos plugins. Y el IDE [**GoLand**](https://www.jetbrains.com/go/download/#section=windows), desarrollado por JetBrains, la desventaja es que es de paga, aunque si ya tienes una licencia de IntelliJ, puedes adecuarlo a Go usando algunos plugins.
 
 ## Conclusion.
 
-!Felicidades! ya tienes instalado y configurado go. Estas a punto de empezar en el bonito mundo de este lenguaje.
+¡Felicidades! Ya tienes instalado y configurado go. Estas a punto de empezar en el bonito mundo de este lenguaje.
 
-Si quieres saber más te recomiendo [los fundamentos de go](../curso-go-fundamentos)
+Si quieres saber más te recomiendo leer [los fundamentos de go](../curso-go-fundamentos)
