@@ -21,9 +21,9 @@ Para poder trabajar en **Go** es necesario configurar nuestro ambiente de desarr
 ## Instalar Go
 Para instalar Go, en el caso de Mac y Windows es muy sencillo, basta con ir a la [página oficial](https://go.dev/doc/install), descargar el paquete de acuerdo a tu sistema operativo, *.pkg* para mack y *.msi* para Windows.
 
-En ambos casos, nos hará la configuración por defecto de nuestras variables de entorno.
+En ambos casos al ejecutar el archivo descargado, la instalación nos hará la configuración por defecto de nuestras variables de entorno.
 
-> También podemos instalar Go usando un gestor de paquetes *Homebrew*, para Mac `brew install go` y *Chocolatey* para Windows `choco install golang`.
+> También podemos instalar Go usando un gestor de paquetes como *Homebrew*, para Mac `brew install go` y *Chocolatey* para Windows `choco install golang`.
 
 En el caso de Linux, tiene los archivos comprimidos. La siguiente lista de comando eliminará versiones anteriores de Go, instalará la versión que descargaste y configurará el path. 
 
@@ -40,7 +40,7 @@ Para verificar que está configurado correctamente, ejecutar el siguiente comand
 $ go version
 ```
 
-Si este comando devuelve la version y arquitectura del sistema, es que está configurado correctamente.
+Si este comando devuelve la version y arquitectura del sistema, es que go fue instalado y configurado correctamente.
 
 ## Entorno de trabajo
 
@@ -91,10 +91,12 @@ Vamos a ver en consola: `Hola mundo!`, a pesar de que go es un lenguaje compilad
 
 ### go build
 
-Una vez que nuestro programa está listo, lo más común es que querríamos crear nuestro archivo binario, en este caso usaremos el comando `go build hola.go`, el cual creara un archivo ejecutable `hola` (`hola.exe` en el caso de windows). Cada vez que corramos el comando `go build` nos creara un archivo binario con el nombre igual a nuestro archivo `.go`, si queremos controlar la salida debemos ejecutar el comando con la bandera `-o`, si queremos que nuestro ejecutable se llame "saludo", el comando a usar debería ser `go build -o saludo hola.go`.
+Una vez que nuestro programa está listo, lo más común es que querríamos crear nuestro archivo binario, en este caso usaremos el comando `go build hola.go`, el cual creara un archivo ejecutable `hola` (`hola.exe` en el caso de windows). 
+
+Cuando usamos el comando `go build` nos creara un archivo binario con el nombre igual a nuestro archivo `.go`, si queremos controlar la salida debemos ejecutar el comando con la bandera `-o`, si queremos que nuestro ejecutable se llame "saludo", el comando a usar debería ser `go build -o saludo hola.go`.
 
 ```bash
-`go build -o saludo hola.go`
+go build -o saludo hola.go
 ```
 
 ¿Cómo te sientes después de escribir tus primeras líneas de código en go?
@@ -104,6 +106,38 @@ Una vez que nuestro programa está listo, lo más común es que querríamos crea
 Cuando trabajamos en equipo es muy común que nuestro código tenga diferentes formatos, debido al estilo de programar de cada uno de los integrantes. **Go** nos provee de herramienta que nos facilitan formatear y ayudarnos a seguir las mejores prácticas en nuestro código.
 
 El comando `go fmt` nos permite formatear nuestro código para hacer más fácil su lectura, si queremos formatear todos nuestros archivos debemos usar `go fmt ./...`.
+
+Es muy importante la estructura de nuestro código, ya que a pesar de que no escribamos el punto y coma `;`, go si lo necesita, pero este es agregado por el entorno de Go antes de compilar, es por eso que debemos seguir una buena estructura de nuestro código. Ejemplo:
+
+```go
+func main() {
+  fmt.Println("Hola mundo!")
+}
+```
+
+```go
+func main() 
+{
+  fmt.Println("Hola mundo!")
+}
+```
+
+A pesar de que ambos codigos parecen verse similar y pensaramos que tendrán el mismo resultado, la realidad es que uno nos marcará error, ya que Go pondra los puntos y comas de la siguiente manera:
+
+```go
+func main() {
+  fmt.Println("Hola mundo!");
+};
+```
+
+```go
+func main();
+{
+  fmt.Println("Hola mundo!");
+};
+```
+
+En el segundo ejemplo es mas claro porque el mal formato terminara por causarnos problemas al momento de compilar.
 
 Otro comando bastante útil que nos ayuda a tener mejores prácticas es `go vet`, este comando nos ayuda a verificar si nuestro código tiene errores, si lo tiene nos muestra el error y nos permite corregirlos corriendo el siguiente comando `go vet ./...`.
 
